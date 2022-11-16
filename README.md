@@ -9,6 +9,8 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-fgarch-feedst
 
 Summary: Provides a collection of functions to analyze and model heteroskedastic behavior in financial time series models.
 
+Development: https://r-forge.r-project.org/scm/viewvc.php/pkg/fGarch/?root=rmetrics
+
 Current build status
 ====================
 
