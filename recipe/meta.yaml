@@ -1,4 +1,4 @@
-{% set version = "4021.88" %}
+{% set version = "4022.89" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,7 +10,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/fGarch_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/fGarch/fGarch_{{ version }}.tar.gz
-  sha256: 91d34f3aecbf5fb23197e65540aa0dba710a972096f29b8dbf0c6c131f5b9983
+  sha256: b4a8727bd9d5f144a15f092fd4b855ca6417aba13e518e2f8d17364dc198c0ec
 
 build:
   merge_build_host: true  # [win]
@@ -21,26 +21,29 @@ build:
 
 requirements:
   build:
+    - cross-r-base {{ r_base }}        # [build_platform != target_platform]
     - {{ compiler('c') }}              # [not win]
     - {{ compiler('m2w64_c') }}        # [win]
     - {{ compiler('fortran') }}        # [not win]
     - {{ compiler('m2w64_fortran') }}  # [win]
-    - {{ posix }}filesystem        # [win]
+    - {{ posix }}filesystem            # [win]
     - {{ posix }}make
-    - {{ posix }}sed               # [win]
-    - {{ posix }}coreutils         # [win]
-    - {{ posix }}zip               # [win]
+    - {{ posix }}sed                   # [win]
+    - {{ posix }}coreutils             # [win]
+    - {{ posix }}zip                   # [win]
   host:
     - r-base
-    - r-matrix
+    - r-matrix >=1.5_0
+    - r-cvar >=0.5
     - r-fbasics
     - r-fastica
     - r-timedate
     - r-timeseries
   run:
     - r-base
-    - {{ native }}gcc-libs         # [win]
-    - r-matrix
+    - {{ native }}gcc-libs             # [win]
+    - r-matrix >=1.5_0
+    - r-cvar >=0.5
     - r-fbasics
     - r-fastica
     - r-timedate
@@ -53,30 +56,14 @@ test:
 
 about:
   home: https://www.rmetrics.org
+  dev_url: https://r-forge.r-project.org/scm/viewvc.php/pkg/fGarch/?root=rmetrics
   license: GPL-2.0-only
   summary: Provides a collection of functions to analyze and model heteroskedastic behavior in financial time series models.
   license_family: GPL2
   license_file:
     - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
 
 extra:
   recipe-maintainers:
     - conda-forge/r
-
-# Package: fGarch
-# Title: Rmetrics - Autoregressive Conditional Heteroskedastic Modelling
-# Date: 2017-11-12
-# Version: 3042.83.2
-# Author: Diethelm Wuertz [aut], Tobias Setz [cre], Yohan Chalabi [ctb], Chris Boudt [ctb], Pierre Chausse [ctb], Michal Miklovac [ctb]
-# Maintainer: Tobias Setz <tobias.setz@live.com>
-# Description: Provides a collection of functions to analyze and model heteroskedastic behavior in financial time series models.
-# Depends: R (>= 2.15.1), timeDate, timeSeries, fBasics
-# Imports: fastICA, Matrix, graphics, methods, stats, utils
-# Suggests: RUnit, tcltk
-# LazyData: yes
-# License: GPL (>= 2)
-# URL: https://www.rmetrics.org
-# NeedsCompilation: yes
-# Packaged: 2020-03-07 10:25:26 UTC; hornik
-# Repository: CRAN
-# Date/Publication: 2020-03-07 11:06:16 UTC
