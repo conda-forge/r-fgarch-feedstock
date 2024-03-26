@@ -1,4 +1,4 @@
-{% set version = "4032.91" %}
+{% set version = "4033.92" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,7 +10,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/fGarch_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/fGarch/fGarch_{{ version }}.tar.gz
-  sha256: e5831f53f74c63c6acb3383a1bbc7661ebb0bda8ac9d935c0d9dc2530c37874a
+  sha256: c835682001c05b178206c8394b3f7ec4e2b96a7d24f8e4ebc68dceae4367140d
 
 build:
   merge_build_host: true  # [win]
